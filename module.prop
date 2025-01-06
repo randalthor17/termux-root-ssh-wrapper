@@ -1,0 +1,5 @@
+id=randalthor17.termux-root-ssh-wrapper
+name=Wrapper script to access termux from system sshd
+version=v1
+versionCode=1
+author=randalthor17

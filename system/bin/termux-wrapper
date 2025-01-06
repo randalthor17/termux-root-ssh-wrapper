@@ -1,0 +1,23 @@
+#!/system/bin/sh
+
+# Define variables for readability
+USER_ID=$(stat -c %u /data/data/com.termux)
+INET_GID=3003
+PREFIX="/data/data/com.termux/files/usr"
+TERMUX_LIB="$PREFIX/lib/libtermux-exec.so"
+HOME_DIR="/data/data/com.termux/files/home"
+TMP_DIR="$PREFIX/tmp"
+PATH="$PREFIX/bin:$PREFIX/bin/applets:/system/bin:/system/xbin:/sbin:/sbin/bin"
+
+# Execute the command with appropriate environment variables
+/sbin/su -g $INET_GID $USER_ID -c \
+    "PATH=/sbin/.magisk/busybox env -i \
+    PREFIX=$PREFIX \
+    LD_PRELOAD=$TERMUX_LIB \
+    HOME=$HOME_DIR \
+    TMPDIR=$TMP_DIR \
+    ANDROID_DATA=/data \
+    TERM=xterm-256color \
+    ANDROID_ROOT=/system \
+    PATH=$PATH \
+    $PREFIX/bin/bash"
